@@ -9,15 +9,16 @@ public class Database {
      * // Creation of the archive with placeholder for a correct read later on
      **/
     public static void connectionToDatabase() {
+        String[] parts = Main.DBURL.split(":3306/|\\?");
         try{
         Class.forName(Menu.DBDRIVER);
         Connection connection;
         connection = DriverManager.getConnection(Main.DBURL, Main.DBUSER, Main.DBPASS);
-        System.out.println(Menu.GREEN+"Connection to Database: ["+Main.DBURL+"] established.."+Menu.RESET);
+        System.out.println(Menu.GREEN+"Connection to Database: ["+String.join("",parts[1])+"] established.."+Menu.RESET);
         }
         catch(ClassNotFoundException | SQLException classNotFoundException){
-            System.out.println(Menu.RED+"\nDatabase Error! [6]\nCritical System Error! - Database does not exist");
-            System.out.println("Please import the provided Database structure into MySQL-Workbench"+Menu.RESET);
+            System.out.println(Menu.RED+"Database Error! [6]\nCritical System Error! - Database "+Menu.GREEN+String.join("",parts[1])+Menu.RED+" does not exist");
+            System.out.println("Please import the provided Database for "+Menu.GREEN+String.join("",parts[1])+Menu.RED+" into MySQL-Workbench"+Menu.RESET);
         }
     }
 
@@ -94,8 +95,7 @@ public class Database {
             pstmt.close();
         }
         catch(ClassNotFoundException | SQLException classNotFoundException){
-            System.out.println(Menu.RED+"\nDatabase Error! [6]\nCritical System Error! - Database does not exist");
-            System.out.println("Please import the provided Database structure into MySQL-Workbench"+Menu.RESET);
+            System.out.println(Menu.RED+"\nDatabase Error! [6] - Pizzas could not be added\n");
         }
     }
 
