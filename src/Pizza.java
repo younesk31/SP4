@@ -62,23 +62,28 @@ public class Pizza{
      * // if there are active orders in the system we display them here so that mario can see them
      **/
     public static void pizzaOrders(ArrayList<Pizza> Display, ArrayList<Menu> pizzaMenu) {
-        if (!Display.isEmpty() && activity) {
-            System.out.println("The following active orders were found in the system\n");
-            for (Pizza pizza : Display) {
-                if (pizza.isActive()) {
-                    System.out.println("Order number: " + pizza.getOrderNumber() +
-                            " | Pizza Nr: " + pizza.getPizzaNrOrdered() +
-                            " | Person ordering is: " + pizza.getCustomerName() +
-                            // " | Pizza active? " + pizza.isActive()
-                            " | Order created on: " + pizza.getTime() +
-                            " | Pizza Named: " + pizzaMenu.get(pizza.getPizzaNrOrdered()-1).getPizzaName() +
-                            " | Pizza Price: " + pizzaMenu.get(pizza.getPizzaNrOrdered()-1).getPizzaPrice() +
-                            " | Ordered: " + pizza.isOnlineoroffline() + "\n");
+        try {
+            if (!Display.isEmpty() & activity) {
+                System.out.println("The following active orders were found in the system\n");
+                for (Pizza pizza : Display) {
+                    if (pizza.isActive()) {
+                        System.out.println("Order number: " + pizza.getOrderNumber() +
+                                " | Pizza Nr: " + pizza.getPizzaNrOrdered() +
+                                " | Person ordering is: " + pizza.getCustomerName() +
+                                // " | Pizza active? " + pizza.isActive()
+                                " | Order created on: " + pizza.getTime() +
+                                " | Pizza Named: " + pizzaMenu.get(pizza.getPizzaNrOrdered() - 1).getPizzaName() +
+                                " | Pizza Price: " + pizzaMenu.get(pizza.getPizzaNrOrdered() - 1).getPizzaPrice() +
+                                " | Ordered: " + pizza.isOnlineoroffline() + "\n");
+                    }
                 }
+            } else {
+                System.out.println(Menu.RED + "\nSystem Error! [2]\nThere are no orders in the system!\n" + Menu.RESET);
+                activity = false;
             }
-        } else {
-            System.out.println(Menu.RED+"\nSystem Error! [2]"+"\nThere are no orders in the system!\n"+Menu.RESET);
-            activity = false;
+        }
+        catch (IndexOutOfBoundsException exception) {
+            System.out.println(Menu.RED + "System Error! [6]\nDatabase is not loaded in!\n" + Menu.RESET);
         }
     }
 

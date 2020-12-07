@@ -24,8 +24,7 @@ public class Main {
         ArrayList<Menu> pizzaMenu = new ArrayList<>();
         ArrayList<Pizza> customer = new ArrayList<>();
         ArrayList<String> stats = new ArrayList<>();
-        Database.addPizzas(pizzaMenu);
-        Database.connectionToDatabase();
+        Database.connectionToDatabase(pizzaMenu);
         Scanner cmd = new Scanner(System.in);
         Menu.start(cmd, pizzaMenu, customer,stats);
     }
